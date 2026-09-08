@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+<link rel="stylesheet" href="/css/app.css">
 </head>
+
 <body>
 
     <form action="/login" method="POST">
