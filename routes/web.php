@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\HomeController;
 
-Route::get('/', [LoginController::class, 'show']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::view('/', 'login');
+Route::post('/login', 'App\Http\Controllers\LoginController@login');
 
-Route::get('/home', [HomeController::class, 'show']);
-Route::get('/logout', [HomeController::class, 'logout']);
+Route::view('/homeadmin', 'homeadmin');
+Route::view('/homestudent', 'homestudent');
+
+Route::get('/logout', 'App\Http\Controllers\LoginController@logout');

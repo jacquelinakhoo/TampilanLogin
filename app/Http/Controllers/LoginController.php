@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
-    public function show()
+    public function login(Request $request)
     {
-        return view('login');
+        if ($request->filled('username') && $request->filled('email') && $request->filled('password')) {
+            $request->session()->put('level', $request->level);
+
+            if ($request->level == 'admin') {
+                return redirect('/homeadmin');
+            } elseif ($request->level == 'student') {
+                return redirect('/homestudent');
+            }
+        }
+
+        return redirect('/')->with('error', 'Access denied. All fields must be filled.');
     }
 
-    public function login()
+    public function logout(Request $request)
     {
-        return redirect('/home');
+        $request->session()->forget('level');
+        return redirect('/');
     }
 }
